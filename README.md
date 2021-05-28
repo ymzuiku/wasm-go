@@ -1,5 +1,7 @@
 # wasm-go
 
+[Youtube Video](https://youtu.be/wlnmY2v0pg8)
+
 Easy start use go wasm write frontend project
 
 - Need install golang
