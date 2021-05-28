@@ -111,7 +111,7 @@ if (fs.existsSync(srcPath)) {
           wsList.delete(ws);
         }
       });
-      console.log(`Build time: ${Date.now() - lastTime}ms by ${file}`);
+      console.log(`build time: ${Date.now() - lastTime}ms`);
       lastTime = 0;
     }, 66);
   });
