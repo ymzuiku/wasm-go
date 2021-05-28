@@ -131,7 +131,7 @@ function startExpress() {
   app.get("/", function (req, rep) {
     var html = fs.readFileSync(htmlPath, "utf8");
     html = html.replace("</html>", "");
-    html += `<script>${devhot(host, port)}</script></html>`;
+    html += `<script>${devhot}</script></html>`;
     rep.code(200).header("Content-Type", "text/html; charset=utf-8").send(html);
   });
 
