@@ -2,6 +2,8 @@
 
 [Youtube Video](https://youtu.be/wlnmY2v0pg8)
 
+[西瓜视频](https://www.ixigua.com/6967353005767131678?utm_source=xiguastudio)
+
 Easy start use go wasm write frontend project
 
 - Need install golang
