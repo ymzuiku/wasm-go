@@ -21,7 +21,7 @@ Easy start use go wasm write frontend project
 mkdir my-project
 cd my-project
 go mod init my-project
-mkdir main.go
+touch main.go
 ```
 
 2 - Edit `main.go`
@@ -50,7 +50,7 @@ func main() {
 ## Install wasm-go
 
 ```bash
-npm i -g wasm-air
+npm i -g wasm-go
 ```
 
 ## Dev start
@@ -58,18 +58,18 @@ npm i -g wasm-air
 At `my-project` root dir:
 
 ```bash
-wasm-air
+wasm-go
 ```
 
 ## Build release
 
 ```bash
-wasm-air --release
+wasm-go --release
 ```
 
 ## Change config
 
-Change `wasm-air.config.js`
+Change `wasm-go.config.js`
 
 ```js
 const { resolve } = require("path");

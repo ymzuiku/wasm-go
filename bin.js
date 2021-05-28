@@ -86,38 +86,40 @@ const watchBuild = () => {
   });
 };
 
-if (fs.existsSync(srcPath)) {
-  watchBuild();
-  if (release) {
-    return;
-  }
-  startExpress();
-  fs.watch(srcPath, { recursive: true }, watchBuild);
-  fs.watchFile(goEntry, watchBuild);
-  let keep = null;
-  fs.watch(publicPath, { recursive: true }, (e, file) => {
-    if (keep) {
-      clearTimeout(keep);
-    }
-    keep = setTimeout(() => {
-      // bs.reload();
-      wsList.forEach((ws) => {
-        if (ws.readyState != 1) {
-          wsList.delete(ws);
-          return;
-        }
-        try {
-          ws.send("reload");
-        } catch (err) {
-          console.error(err);
-          wsList.delete(ws);
-        }
-      });
-      console.log(`build time: ${Date.now() - lastTime}ms`);
-      lastTime = 0;
-    }, 66);
-  });
+watchBuild();
+if (release) {
+  return;
 }
+startExpress();
+if (!fs.existsSync(srcPath)) {
+  fs.mkdirpSync(srcPath);
+}
+fs.watch(srcPath, { recursive: true }, watchBuild);
+
+fs.watchFile(goEntry, watchBuild);
+let keep = null;
+fs.watch(publicPath, { recursive: true }, (e, file) => {
+  if (keep) {
+    clearTimeout(keep);
+  }
+  keep = setTimeout(() => {
+    // bs.reload();
+    wsList.forEach((ws) => {
+      if (ws.readyState != 1) {
+        wsList.delete(ws);
+        return;
+      }
+      try {
+        ws.send("reload");
+      } catch (err) {
+        console.error(err);
+        wsList.delete(ws);
+      }
+    });
+    console.log(`build time: ${Date.now() - lastTime}ms`);
+    lastTime = 0;
+  }, 66);
+});
 
 function startExpress() {
   const app = fastify();
