@@ -75,6 +75,7 @@ Change `wasm-air.config.js`
 const { resolve } = require("path");
 
 module.exports = {
+  gzip: false,
   host: "127.0.0.1",
   port: 3200,
   goEntry: resolve(__dirname, "main.go"),

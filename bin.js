@@ -9,6 +9,7 @@ const { fastify } = require("fastify");
 const fastifyWs = require("fastify-websocket");
 const fastifyHttpProxy = require("fastify-http-proxy");
 const fastifyStatic = require("fastify-static");
+
 const wsList = new Set();
 
 let release = "";
@@ -26,6 +27,7 @@ if (!fs.existsSync(resolve(cwd, "wasm-air.config.js"))) {
 }
 
 const {
+  gzip,
   host,
   port,
   proxy,
@@ -124,6 +126,10 @@ function startExpress() {
     proxy.forEach((p) => {
       app.register(fastifyHttpProxy, p);
     });
+  }
+
+  if (gzip) {
+    app.register(require("fastify-compress"), { global: true });
   }
 
   app.register(fastifyStatic, {
