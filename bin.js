@@ -59,7 +59,10 @@ if (!fs.existsSync(resolve(publicPath, "wasm_exec.js"))) {
 let lastTime = 0;
 
 const watchBuild = () => {
-  lastTime = Date.now();
+  if (lastTime < 1) {
+    lastTime = Date.now();
+  }
+
   exec(build(release, publicPath, goEntry), (err, ioIn, ioOut) => {
     if (release) {
       const html = fs.readFileSync(htmlPath).toString();
@@ -108,7 +111,8 @@ if (fs.existsSync(srcPath)) {
           wsList.delete(ws);
         }
       });
-      console.log(`Use time: ${Date.now() - lastTime}ms by ${file}`);
+      console.log(`Build time: ${Date.now() - lastTime}ms by ${file}`);
+      lastTime = 0;
     }, 66);
   });
 }
