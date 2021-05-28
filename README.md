@@ -7,8 +7,8 @@ Easy start use go wasm write frontend project
 
 ## feature
 
-- Auto build on edit
-- Auto reload brower
+- Auto build on change
+- Auto reload brower on change
 - Auto create frontend wasm
 - Watch project
 - Proxy
