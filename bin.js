@@ -73,6 +73,7 @@ const watchBuild = () => {
         `"main.wasm?t=${Date.now().toString().slice(5)}"`
       );
       fs.writeFileSync(htmlPath, _html);
+      console.log("release done.");
     }
     if (err) {
       console.error(err);
